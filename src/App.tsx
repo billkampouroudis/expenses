@@ -1,6 +1,6 @@
 import { MantineProvider } from '@mantine/core';
 import HomePage from './pages/home/Home';
-import theme from './theme';
+import theme from './styles/theme/theme';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import NotFound from './pages/notFound/NotFound';
 

@@ -1,0 +1,76 @@
+@use './mantine' as mantine;
+
+:root {
+  // Responsive titles
+  h1 {
+    font-size: 2rem;
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-sm) {
+      font-size: 2.5rem;
+    }
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-md) {
+      font-size: 3rem;
+    }
+  }
+
+  h2 {
+    font-size: 1.75rem;
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-sm) {
+      font-size: 2rem;
+    }
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-md) {
+      font-size: 2.5rem;
+    }
+  }
+
+  h3 {
+    font-size: 1.5rem;
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-sm) {
+      font-size: 1.75rem;
+    }
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-md) {
+      font-size: 2rem;
+    }
+  }
+
+  h4 {
+    font-size: 1.25rem;
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-sm) {
+      font-size: 1.5rem;
+    }
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-md) {
+      font-size: 1.75rem;
+    }
+  }
+
+  h5 {
+    font-size: 1rem;
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-sm) {
+      font-size: 1.25rem;
+    }
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-md) {
+      font-size: 1.5rem;
+    }
+  }
+
+  h5 {
+    font-size: 0.875rem;
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-sm) {
+      font-size: 1rem;
+    }
+
+    @include mantine.larger-than(mantine.$mantine-breakpoint-md) {
+      font-size: 1.25rem;
+    }
+  }
+}

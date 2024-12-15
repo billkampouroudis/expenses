@@ -26,6 +26,7 @@
     "@capacitor/android": "^6.1.2",
     "@capacitor/cli": "^6.1.2",
     "@capacitor/core": "^6.1.2",
+    "@fontsource/noto-sans": "^5.1.0",
     "@mantine/core": "^7.14.3",
     "@mantine/hooks": "^7.14.3",
     "react": "^18.3.1",

@@ -9,6 +9,15 @@ const theme = createTheme({
     lg: '24px',
     xl: '32px',
   },
+  // values must be the same as in your _mantine.scss
+  breakpoints: {
+    xs: '36em',
+    sm: '48em',
+    md: '62em',
+    lg: '75em',
+    xl: '88em',
+  },
+  fontFamily: 'Noto Sans, sans-serif',
 });
 
 export default theme;
