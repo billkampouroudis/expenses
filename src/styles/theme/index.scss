@@ -1,4 +1,4 @@
-@use './_mantine' as mantine;
+// _mantine is imported in the additionalData of vite.config.ts
 @use './themeOverrides';
 @use './themeOverridesLight';
 @use './themeOverridesDark';

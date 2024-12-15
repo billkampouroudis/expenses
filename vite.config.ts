@@ -8,6 +8,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         api: 'modern-compiler',
+        additionalData: `@use '/src/styles/theme/_mantine' as mantine;`,
       },
     },
   },
