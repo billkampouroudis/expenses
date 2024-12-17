@@ -9,7 +9,7 @@ function MainLayout(props: MainLayoutProps) {
   return (
     <Paper className={styles.mainLayoutWrapper}>
       {children}
-      <MainMenu className={styles.mainMenu} />
+      <MainMenu />
     </Paper>
   );
 }
