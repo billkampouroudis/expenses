@@ -1,12 +1,20 @@
 @use 'sass:math';
+@use 'sass:map';
 
 // Define variables for your breakpoints,
 // values must be the same as in your theme.ts
-$mantine-breakpoint-xs: '36em';
-$mantine-breakpoint-sm: '48em';
-$mantine-breakpoint-md: '62em';
-$mantine-breakpoint-lg: '75em';
-$mantine-breakpoint-xl: '88em';
+$breakpoints: (
+  xs: 0,
+  sm: 33em,
+  md: 48em,
+  lg: 62em,
+  xl: 75em,
+  xxl: 88em,
+);
+
+@function get-breakpoint($key) {
+  @return map.get($breakpoints, $key);
+}
 
 @function rem($value) {
   @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
@@ -38,14 +46,14 @@ $mantine-breakpoint-xl: '88em';
   }
 }
 
-@mixin smaller-than($breakpoint) {
-  @media (max-width: $breakpoint) {
+@mixin media-to($key) {
+  @media (max-width: get-breakpoint($key)) {
     @content;
   }
 }
 
-@mixin larger-than($breakpoint) {
-  @media (min-width: $breakpoint) {
+@mixin media-from($key) {
+  @media (min-width: get-breakpoint($key)) {
     @content;
   }
 }
