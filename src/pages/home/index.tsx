@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import reactLogo from '../../assets/react.svg';
+import reactLogo from '@/assets/illustrations/react.svg';
 import viteLogo from '/vite.svg';
 import { Button, Card, Container } from '@mantine/core';
-import MainLayout from '../../components/layouts/MainLayout/MainLayout';
+import MainLayout from '@/components/layouts/mainLayout/MainLayout';
 
 function Home() {
   const [count, setCount] = useState(0);

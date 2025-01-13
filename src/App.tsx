@@ -1,8 +1,8 @@
 import { MantineProvider } from '@mantine/core';
-import HomePage from './pages/home/Home';
+import HomePage from './pages/Home';
 import theme from './styles/theme/theme';
 import { BrowserRouter, Route, Routes } from 'react-router';
-import NotFound from './pages/notFound/NotFound';
+import NotFound from './pages/NotFound';
 import MainMenu from './components/navigation/mainMenu/MainMenu';
 
 function App() {

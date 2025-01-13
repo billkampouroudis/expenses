@@ -1,5 +1,5 @@
 import { Center, Container, Image, Title } from '@mantine/core';
-import MainLayout from '../../components/layouts/MainLayout/MainLayout';
+import MainLayout from '../../components/layouts/mainLayout/MainLayout';
 import NotFoundIllustration from '@/assets/illustrations/undraw_page_not_found.svg';
 
 function NotFound() {
