@@ -1,0 +1,31 @@
+/* For light mode */
+
+:root[data-mantine-color-scheme='light'] {
+  background-color: var(--mantine-color-oat-1);
+  #root {
+    background-color: var(--mantine-color-oat-1) !important;
+  }
+
+  .mantine-Card-root {
+    background-color: #fff;
+  }
+
+  .mantine-Tabs-tab {
+    &:hover {
+      background-color: var(--tabs-color);
+      filter: brightness(0.9);
+      color: #fff;
+    }
+  }
+
+  .mantine-Modal-overlay {
+    backdrop-filter: blur(2px);
+  }
+
+  .mantine-Modal-content {
+    .mantine-Modal-body,
+    .mantine-Modal-header {
+      background-color: #fff;
+    }
+  }
+}

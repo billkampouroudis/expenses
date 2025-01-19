@@ -1,0 +1,42 @@
+$headerHeight: 270px;
+$mainContentOffset: -30px;
+
+.mainContainer {
+  padding: 0;
+  position: relative;
+
+  @include mantine.media-to(md) {
+    --container-size: fluid !important;
+  }
+
+  .header {
+    background: linear-gradient(30deg, #456965, #6c8884);
+    min-height: $headerHeight;
+    padding: 20px 20px 50px;
+
+    position: sticky;
+    top: 0;
+
+    @include mantine.media-from(md) {
+      padding: 32px 32px 50px;
+      margin-top: 20px;
+      border-radius: var(--mantine-radius-lg) var(--mantine-radius-lg) 0 0;
+      position: static;
+      top: unset;
+    }
+  }
+
+  .content {
+    margin-top: $mainContentOffset;
+    border-radius: var(--mantine-radius-lg) var(--mantine-radius-lg) 0 0;
+    padding: 20px;
+    z-index: 1;
+    min-height: calc(100vh - ($headerHeight - $mainContentOffset) - 10px);
+
+    @include mantine.media-from(md) {
+      border-radius: var(--mantine-radius-lg);
+      padding: 32px;
+      min-height: auto;
+    }
+  }
+}

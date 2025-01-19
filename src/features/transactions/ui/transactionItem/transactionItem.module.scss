@@ -1,0 +1,16 @@
+.transactionItem {
+  cursor: pointer;
+  border-radius: var(--mantine-radius-md);
+
+  .transactionItemIcon {
+    border-radius: var(--mantine-radius-md);
+    padding: 16px;
+    background-color: var(--mantine-color-oat-2) !important;
+    color: var(--mantine-color-secondary-6);
+  }
+
+  .transactionItemBody {
+    border-radius: var(--mantine-radius-md);
+    width: 100%;
+  }
+}

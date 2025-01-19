@@ -1,0 +1,6 @@
+:root {
+  // Removes the button animation when clicked
+  .mantine-Button-root {
+    transform: translate(0);
+  }
+}
