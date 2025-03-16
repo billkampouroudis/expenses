@@ -29,6 +29,14 @@ export default [
       semi: ['warn', 'always'],
       'react/react-in-jsx-scope': 'off',
       'max-len': ['error', { code: 100 }],
+      'no-unused-vars': [
+        'warn', // Or 'error'
+        {
+          // ignore arguments starting with _
+          varsIgnorePattern: '^_',
+          argsIgnorePattern: '^_',
+        },
+      ],
     },
     settings: {
       react: {

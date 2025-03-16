@@ -1,0 +1,8 @@
+/* For dark mode */
+:root[data-mantine-color-scheme='dark'] {
+  --mantine-color-body: var(--mantine-color-ironwood-7);
+
+  .mantine-Card-root {
+    background-color: var(--mantine-color-ironwood-6);
+  }
+}
