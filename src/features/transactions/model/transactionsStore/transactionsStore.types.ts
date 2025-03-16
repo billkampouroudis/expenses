@@ -7,6 +7,7 @@ import {
 } from '@/shared/api/transactions';
 import {
   CreateTransactionRequestDto,
+  DeleteTransactionResponseDto,
   UpdateTransactionResponseDto,
 } from '@/shared/api/transactions/transactions.dto';
 
@@ -53,6 +54,12 @@ export interface TransactionsStore {
   updateTransactionError: Error | null | undefined;
   setUpdateTransactionError: (_updateTransactionError: Error | null) => void;
 
+  deleteTransactionLoading: boolean;
+  setDeleteTransactionLoading: (_deleteTransactionLoading: boolean) => void;
+
+  deleteTransactionError: Error | null | undefined;
+  setDeleteTransactionError: (_deleteTransactionError: Error | null) => void;
+
   // API calls
 
   fetchTransactions: (
@@ -67,4 +74,6 @@ export interface TransactionsStore {
     _transactionId: string,
     _transactionData: Partial<Transaction>
   ) => Promise<ApiResponse<UpdateTransactionResponseDto>>;
+
+  deleteTransaction: (_transactionId: string) => Promise<ApiResponse<DeleteTransactionResponseDto>>;
 }

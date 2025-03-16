@@ -1,5 +1,9 @@
 import { fetchTransactions } from '@/shared/api/transactions';
-import { createTransaction, updateTransaction } from '@/shared/api/transactions/transactions.api';
+import {
+  createTransaction,
+  deleteTransaction,
+  updateTransaction,
+} from '@/shared/api/transactions/transactions.api';
 import { handleError } from '@/shared/lib/errorHandling';
 import dayjs from 'dayjs';
 import { create } from 'zustand';
@@ -50,6 +54,12 @@ export const useTransactionsStore = create<TransactionsStore>()(
 
     updateTransactionError: null,
     setUpdateTransactionError: (updateTransactionError) => set({ updateTransactionError }),
+
+    deleteTransactionLoading: false,
+    setDeleteTransactionLoading: (deleteTransactionLoading) => set({ deleteTransactionLoading }),
+
+    deleteTransactionError: null,
+    setDeleteTransactionError: (deleteTransactionError) => set({ deleteTransactionError }),
 
     // API calls
 
@@ -111,6 +121,31 @@ export const useTransactionsStore = create<TransactionsStore>()(
       } finally {
         set({
           updateTransactionLoading: false,
+        });
+      }
+    },
+
+    deleteTransaction: async (transactionId: string) => {
+      set({ deleteTransactionLoading: true, deleteTransactionError: null });
+
+      try {
+        const response = await deleteTransaction(transactionId);
+
+        if (response) {
+          set({
+            transactions: response.transactions,
+            totalExpenses: response.totalExpenses,
+            totalIncome: response.totalIncome,
+          });
+        }
+
+        return { data: response, error: null };
+      } catch (error) {
+        const handledError = handleError(error, (err) => set({ deleteTransactionError: err }));
+        return { data: null, error: handledError };
+      } finally {
+        set({
+          deleteTransactionLoading: false,
         });
       }
     },

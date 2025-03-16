@@ -1,4 +1,4 @@
-import { Card, em, Flex, Grid, Text, Title } from '@mantine/core';
+import { ActionIcon, Card, em, Flex, Grid, Menu, Text, Title } from '@mantine/core';
 import styles from './transactionItem.module.scss';
 import {
   HouseLine,
@@ -9,15 +9,22 @@ import {
   Receipt,
   Coins,
   Gift,
+  DotsThreeVertical,
+  Trash,
 } from '@phosphor-icons/react';
 import { categoryTitles } from '@/entities/category';
 import { TransactionItemProps } from './transactionItem.types';
 import dayjs from 'dayjs';
 import { useMediaQuery } from '@mantine/hooks';
 import { theme } from '@/shared/config/theme';
+import React from 'react';
+import { modals } from '@mantine/modals';
+import { useTransactionsStore } from '../../model/transactionsStore';
 
 export function TransactionItem(props: TransactionItemProps) {
   const { transaction, onClick } = props;
+
+  const deleteTransaction = useTransactionsStore((state) => state.deleteTransaction);
 
   const isMobile = useMediaQuery(`(max-width: ${em(theme.breakpoints?.sm)})`);
 
@@ -48,6 +55,21 @@ export function TransactionItem(props: TransactionItemProps) {
     }
   };
 
+  const handleMenuClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
+  const deleteItem = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    modals.openConfirmModal({
+      title: 'Delete transaction',
+      children: <Text size="sm">Are you sure you want to delete this transaction?</Text>,
+      labels: { confirm: 'Yes', cancel: 'Cancel' },
+      onConfirm: () => deleteTransaction(transaction.id),
+    });
+  };
+
   return (
     <div className={styles.transactionItem} onClick={onClick}>
       <Flex align="center" gap="sm">
@@ -55,7 +77,7 @@ export function TransactionItem(props: TransactionItemProps) {
 
         <div className={styles.transactionItemBody}>
           <Grid>
-            <Grid.Col span={isMobile ? 10 : 5}>
+            <Grid.Col span={isMobile ? 9 : 5}>
               <Title order={4} size="h6" mb="2px">
                 {transaction.categoryTitle}
               </Title>
@@ -69,16 +91,33 @@ export function TransactionItem(props: TransactionItemProps) {
               </Text>
             </Grid.Col>
 
-            <Grid.Col span={5} visibleFrom="sm">
+            <Grid.Col span={4} visibleFrom="sm">
               <Text size="sm" c="ironwood.2">
                 {transaction.description}
               </Text>
             </Grid.Col>
 
-            <Grid.Col span={2}>
-              <Text fw={600} ta="right">
-                {transaction.amount}€
-              </Text>
+            <Grid.Col span={3}>
+              <Flex justify="end">
+                <Text fw={600} ta="right" mr="sm">
+                  {transaction.amount}€
+                </Text>
+
+                <Menu position="bottom-end">
+                  <Menu.Target>
+                    <ActionIcon variant="subtle" aria-label="Actions" onClick={handleMenuClick}>
+                      <DotsThreeVertical />
+                    </ActionIcon>
+                  </Menu.Target>
+
+                  <Menu.Dropdown>
+                    <Menu.Label>Actions</Menu.Label>
+                    <Menu.Item color="red" leftSection={<Trash />} onClick={deleteItem}>
+                      Delete transaction
+                    </Menu.Item>
+                  </Menu.Dropdown>
+                </Menu>
+              </Flex>
             </Grid.Col>
           </Grid>
         </div>

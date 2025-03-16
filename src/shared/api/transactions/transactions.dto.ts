@@ -41,3 +41,9 @@ export type TransactionActiveFiltersDto = {
   month?: number;
   year?: number;
 };
+
+export type DeleteTransactionResponseDto = {
+  transactions: Transaction[];
+  totalExpenses: number;
+  totalIncome: number;
+} | null;
