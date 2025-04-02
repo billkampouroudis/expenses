@@ -4,6 +4,7 @@ import { getStorage, setStorage } from '@/shared/lib/storage';
 import {
   CreateTransactionRequestDto,
   CreateTransactionResponseDto,
+  DeleteTransactionResponseDto,
   FetchTransactionsRequestDto,
   FetchTransactionsResponseDto,
   TransactionActiveFiltersDto,
@@ -114,4 +115,18 @@ export const updateTransaction = async (
   } else {
     throw new Error('Transaction not found');
   }
+};
+
+export const deleteTransaction = async (
+  transactionId: string,
+  activeFilters: TransactionActiveFiltersDto = {}
+): Promise<DeleteTransactionResponseDto> => {
+  const transactions = await getStorage('transactions');
+  const updatedTransactions = transactions.filter((t: Transaction) => t.id !== transactionId);
+
+  await setStorage('transactions', JSON.stringify(updatedTransactions));
+
+  const fetchResults = await fetchTransactions({ ...activeFilters });
+
+  return fetchResults;
 };

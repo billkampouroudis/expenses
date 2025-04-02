@@ -18,16 +18,22 @@ export function HomePage() {
   const totalExpenses = useTransactionsStore((state) => state.totalExpenses);
   const totalIncome = useTransactionsStore((state) => state.totalIncome);
   const fetchTransactionsLoading = useTransactionsStore((state) => state.fetchTransactionsLoading);
+
   const selectedMonth = useTransactionsStore((state) => state.selectedMonth);
   const setSelectedMonth = useTransactionsStore((state) => state.setSelectedMonth);
+
   const selectedYear = useTransactionsStore((state) => state.selectedYear);
   const setSelectedYear = useTransactionsStore((state) => state.setSelectedYear);
+
   const selectedCategoryType = useTransactionsStore((state) => state.selectedCategoryType);
   const setSelectedCategoryType = useTransactionsStore((state) => state.setSelectedCategoryType);
+
   const showTransactionModal = useTransactionsStore((state) => state.showTransactionModal);
   const setShowTransactionModal = useTransactionsStore((state) => state.setShowTransactionModal);
+
   const setSelectedTransaction = useTransactionsStore((state) => state.setSelectedTransaction);
 
+  // Show transactions for selected month and category type
   const filteredTransactions = useMemo(() => {
     return transactions.filter((transaction) => {
       return (
@@ -102,11 +108,7 @@ export function HomePage() {
       </Content>
 
       <Modal opened={showTransactionModal} onClose={onModalClose}>
-        <TransactionForm
-          onSuccess={() => {
-            onModalClose();
-          }}
-        />
+        <TransactionForm onSuccess={onModalClose} />
       </Modal>
     </MainLayout>
   );
