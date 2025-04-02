@@ -12,7 +12,7 @@ import { categoryTypes } from '@/entities/category';
 import { devtools } from 'zustand/middleware';
 
 export const useTransactionsStore = create<TransactionsStore>()(
-  devtools((set) => ({
+  devtools((set, get) => ({
     transactions: [],
     setTransactions: (transactions) => set({ transactions }),
 
@@ -67,6 +67,7 @@ export const useTransactionsStore = create<TransactionsStore>()(
       set({ fetchTransactionsLoading: true, fetchTransactionsError: null });
       try {
         const response = await fetchTransactions(data);
+
         set({
           transactions: response.transactions,
           totalExpenses: response.totalExpenses,
@@ -85,7 +86,11 @@ export const useTransactionsStore = create<TransactionsStore>()(
     createTransaction: async (transaction) => {
       set({ createTransactionLoading: true, createTransactionError: null });
       try {
-        const response = await createTransaction(transaction);
+        const response = await createTransaction(transaction, {
+          month: get().selectedMonth,
+          year: get().selectedYear,
+          categoryType: get().selectedCategoryType,
+        });
         // Add the new transaction to the list
         set({
           transactions: response.transactions,
@@ -104,7 +109,11 @@ export const useTransactionsStore = create<TransactionsStore>()(
     updateTransaction: async (transactionId, transactionData) => {
       set({ updateTransactionLoading: true, updateTransactionError: null });
       try {
-        const response = await updateTransaction(transactionId, transactionData);
+        const response = await updateTransaction(transactionId, transactionData, {
+          month: get().selectedMonth,
+          year: get().selectedYear,
+          categoryType: get().selectedCategoryType,
+        });
 
         if (response) {
           set({
@@ -129,7 +138,11 @@ export const useTransactionsStore = create<TransactionsStore>()(
       set({ deleteTransactionLoading: true, deleteTransactionError: null });
 
       try {
-        const response = await deleteTransaction(transactionId);
+        const response = await deleteTransaction(transactionId, {
+          month: get().selectedMonth,
+          year: get().selectedYear,
+          categoryType: get().selectedCategoryType,
+        });
 
         if (response) {
           set({

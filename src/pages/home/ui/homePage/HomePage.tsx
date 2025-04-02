@@ -1,7 +1,7 @@
 import { TransactionsList } from '@/features/transactions/ui/transactionsList';
 import { MainLayout, Header, Content } from '@/shared/ui/layouts/mainLayout';
 import { Button, Center, Flex, Image, Modal, Text, Title } from '@mantine/core';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { categoryTypes } from '@/entities/category';
 import EmptyIllustration from '@shared/assets/illustrations/undraw_no-data.svg';
 import {
@@ -34,15 +34,6 @@ export function HomePage() {
   const setSelectedTransaction = useTransactionsStore((state) => state.setSelectedTransaction);
 
   // Show transactions for selected month and category type
-  const filteredTransactions = useMemo(() => {
-    return transactions.filter((transaction) => {
-      return (
-        transaction.categoryType === selectedCategoryType &&
-        new Date(transaction.date).getMonth() === selectedMonth &&
-        new Date(transaction.date).getFullYear() === selectedYear
-      );
-    });
-  }, [transactions, selectedCategoryType, selectedMonth]);
 
   const onModalClose = () => {
     setShowTransactionModal(false);
@@ -53,14 +44,10 @@ export function HomePage() {
   };
 
   useEffect(() => {
-    const loadTransactions = async () => {
-      fetchTransactions({
-        month: selectedMonth,
-        year: selectedYear,
-      });
-    };
-
-    loadTransactions();
+    fetchTransactions({
+      month: selectedMonth,
+      year: selectedYear,
+    });
   }, [selectedMonth, selectedCategoryType]);
 
   return (
@@ -97,13 +84,13 @@ export function HomePage() {
           </Button>
         </Flex>
 
-        {!filteredTransactions?.length ? (
+        {!transactions?.length ? (
           <div style={{ textAlign: 'center' }}>
             <Image src={EmptyIllustration} w="100px" display="inline-block" mr="6px" />
             <Text> No transactions found</Text>
           </div>
         ) : (
-          <TransactionsList transactions={filteredTransactions} />
+          <TransactionsList transactions={transactions} />
         )}
       </Content>
 

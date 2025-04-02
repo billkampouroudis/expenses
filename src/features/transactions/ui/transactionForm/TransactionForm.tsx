@@ -7,6 +7,7 @@ import { FormValues, schema, TransactionFormProps } from './transactionForm.type
 import { useTransactionsStore } from '../../model/transactionsStore';
 import { useEffect } from 'react';
 import { notifications } from '@mantine/notifications';
+import { getValidDate } from '@/shared/lib/dates';
 
 export function TransactionForm(props: TransactionFormProps) {
   const { onSuccess = () => {}, onError = () => {} } = props;
@@ -15,6 +16,8 @@ export function TransactionForm(props: TransactionFormProps) {
   const updateTransaction = useTransactionsStore((state) => state.updateTransaction);
   const selectedTransaction = useTransactionsStore((state) => state.selectedTransaction);
   const selectedCategoryType = useTransactionsStore((state) => state.selectedCategoryType);
+  const selectedMonth = useTransactionsStore((state) => state.selectedMonth);
+  const selectedYear = useTransactionsStore((state) => state.selectedYear);
 
   const isEditMode = !!selectedTransaction;
 
@@ -23,7 +26,9 @@ export function TransactionForm(props: TransactionFormProps) {
     initialValues: {
       categoryTitle: selectedTransaction?.categoryTitle || undefined,
       amount: selectedTransaction?.amount || undefined,
-      date: selectedTransaction ? new Date(selectedTransaction.date) : new Date(),
+      date: selectedTransaction
+        ? new Date(selectedTransaction.date)
+        : getValidDate(selectedYear, selectedMonth).toDate(),
       description: selectedTransaction?.description || '',
     },
   });
