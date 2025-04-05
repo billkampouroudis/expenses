@@ -3,6 +3,8 @@ import { CaretLeft, CaretRight } from '@phosphor-icons/react';
 import { MonthAndTypeSelectorProps } from './monthAndTypeSelector.types';
 import { CategoryTypeTabs } from '../categoryTypeTabs';
 import dayjs from 'dayjs';
+import { useTransactionsStore } from '@/features/transactions/model/transactionsStore';
+import { MonthAndTypeSelectorSkeleton } from './MonthAndTypeSelector.skeleton';
 
 export function MonthAndTypeSelector(props: MonthAndTypeSelectorProps) {
   const {
@@ -14,6 +16,9 @@ export function MonthAndTypeSelector(props: MonthAndTypeSelectorProps) {
     selectedCategoryType,
     onCategoryTypeChange,
   } = props;
+
+  const fetchTransactionsLoading = useTransactionsStore((state) => state.fetchTransactionsLoading);
+
   const selectNextMonth = () => {
     if (selectedMonth < 11) {
       onMonthChange(selectedMonth + 1);
@@ -39,14 +44,18 @@ export function MonthAndTypeSelector(props: MonthAndTypeSelectorProps) {
           <CaretLeft />
         </ActionIcon>
 
-        <div>
-          <Text c="white" style={{ minWidth: '200px' }}>
-            {dayjs().month(selectedMonth).locale('en').format('MMMM')} {selectedYear}
-          </Text>
-          <Title order={2} size="h1" c="white">
-            {amount}€
-          </Title>
-        </div>
+        {fetchTransactionsLoading ? (
+          <MonthAndTypeSelectorSkeleton />
+        ) : (
+          <div>
+            <Text c="white" style={{ minWidth: '200px' }}>
+              {dayjs().month(selectedMonth).locale('en').format('MMMM')} {selectedYear}
+            </Text>
+            <Title order={2} size="h1" c="white">
+              {amount}€
+            </Title>
+          </div>
+        )}
 
         <ActionIcon variant="filled" aria-label="Next month" onClick={selectNextMonth}>
           <CaretRight />

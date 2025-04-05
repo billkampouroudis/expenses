@@ -1,4 +1,4 @@
-import { ActionIcon, Card, em, Flex, Grid, Menu, Text, Title } from '@mantine/core';
+import { ActionIcon, Card, Flex, Grid, Menu, Text, Title } from '@mantine/core';
 import styles from './transactionItem.module.scss';
 import {
   HouseLine,
@@ -15,18 +15,18 @@ import {
 import { categoryTitles } from '@/entities/category';
 import { TransactionItemProps } from './transactionItem.types';
 import dayjs from 'dayjs';
-import { useMediaQuery } from '@mantine/hooks';
-import { theme } from '@/shared/config/theme';
 import React from 'react';
 import { modals } from '@mantine/modals';
 import { useTransactionsStore } from '../../model/transactionsStore';
+import useBreakpoints from '@/shared/lib/hooks/useBreakpoints';
 
 export function TransactionItem(props: TransactionItemProps) {
   const { transaction, onClick } = props;
 
   const deleteTransaction = useTransactionsStore((state) => state.deleteTransaction);
 
-  const isMobile = useMediaQuery(`(max-width: ${em(theme.breakpoints?.sm)})`);
+  const breakpoint = useBreakpoints();
+  const isMobile = breakpoint === 'xs';
 
   const dt = dayjs(transaction.date);
 

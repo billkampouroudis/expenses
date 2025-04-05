@@ -1,6 +1,6 @@
 # Expense Tracker App (FSD Architecture)
 
-This project is an expense tracking application built using React and the Featured Sliced Design (FSD) architecture.
+This project is a small expense tracking application built using React and the Featured Sliced Design (FSD) architecture.
 
 ## Technologies
 
@@ -20,7 +20,6 @@ This project is an expense tracking application built using React and the Featur
 - **`features/`:** Encapsulates business logic related to specific expense tracking features.
 - **`entities/`:** Represents data entities like Expense and Category.
 - **`shared/`:** Contains reusable UI components, utility functions, and shared types.
-- **`styles/`:** Holds global styles and Mantine theme configuration.
 
 ---
 

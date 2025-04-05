@@ -4,10 +4,7 @@ import { Button, Center, Flex, Image, Modal, Text, Title } from '@mantine/core';
 import { useEffect } from 'react';
 import { categoryTypes } from '@/entities/category';
 import EmptyIllustration from '@shared/assets/illustrations/undraw_no-data.svg';
-import {
-  MonthAndTypeSelector,
-  MonthAndTypeSelectorSkeleton,
-} from '@/features/categories/ui/monthAndTypeSelector';
+import { MonthAndTypeSelector } from '@/features/categories/ui/monthAndTypeSelector';
 import { useTransactionsStore } from '@/features/transactions/model/transactionsStore';
 import { Plus } from '@phosphor-icons/react';
 import { TransactionForm } from '@/features/transactions/ui/transactionForm';
@@ -17,7 +14,6 @@ export function HomePage() {
   const transactions = useTransactionsStore((state) => state.transactions);
   const totalExpenses = useTransactionsStore((state) => state.totalExpenses);
   const totalIncome = useTransactionsStore((state) => state.totalIncome);
-  const fetchTransactionsLoading = useTransactionsStore((state) => state.fetchTransactionsLoading);
 
   const selectedMonth = useTransactionsStore((state) => state.selectedMonth);
   const setSelectedMonth = useTransactionsStore((state) => state.setSelectedMonth);
@@ -54,19 +50,15 @@ export function HomePage() {
     <MainLayout>
       <Header>
         <Center h="270">
-          {fetchTransactionsLoading ? (
-            <MonthAndTypeSelectorSkeleton />
-          ) : (
-            <MonthAndTypeSelector
-              selectedMonth={selectedMonth}
-              onMonthChange={setSelectedMonth}
-              selectedYear={selectedYear}
-              onYearChange={setSelectedYear}
-              amount={selectedCategoryType === categoryTypes.income ? totalIncome : totalExpenses}
-              selectedCategoryType={selectedCategoryType}
-              onCategoryTypeChange={setSelectedCategoryType}
-            />
-          )}
+          <MonthAndTypeSelector
+            selectedMonth={selectedMonth}
+            onMonthChange={setSelectedMonth}
+            selectedYear={selectedYear}
+            onYearChange={setSelectedYear}
+            amount={selectedCategoryType === categoryTypes.income ? totalIncome : totalExpenses}
+            selectedCategoryType={selectedCategoryType}
+            onCategoryTypeChange={setSelectedCategoryType}
+          />
         </Center>
       </Header>
       <Content>
